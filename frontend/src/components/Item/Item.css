@@ -37,4 +37,74 @@
 }
 
 
+@media(max-width: 1280px){
+    .item{
+        width: 210px;
+        font-size: 14px;
+    }
+    
+    .item img{
+        width: 220px;
+        height: 250px;
+    }
+}
 
+@media(max-width: 1024px){
+    .item{
+        width: 160px;
+        font-size: 13px;
+    }
+
+    .item-prices{
+        width: 150px;
+    }
+
+    .item img{
+        width: 170px;
+    }
+    .item-price-old{
+        font-size: 16px;
+    }
+
+    .item p{
+        width: 180px;
+    }
+}
+
+@media(max-width: 800px){
+    .item{
+        width: 125px;
+        font-size: 13px;
+    }
+
+    .item img{
+        width: 130px;
+        height: 200px;
+    }
+
+    .item-prices{
+        width: 100px;
+    }
+
+    .item-price-new{
+        font-size: 14px;
+    }
+
+    .item-price-old{
+        font-size: 15px;
+    }
+
+    .item p{
+        width: 135px;
+    }
+}
+
+@media(max-width: 500px){
+    .item{
+        width: 160px;
+    }
+
+    .item img{
+        width: 160px;
+    }
+}

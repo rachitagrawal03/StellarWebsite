@@ -107,3 +107,246 @@
 .productDisplay-rightCategory span {
     font-weight: 600;
 }
+
+@media(max-width: 1280px){
+    .productDisplay{
+        margin: 0px 60px;
+    }
+
+    .productDisplay-left{
+        gap: 10px;
+    }
+
+    .productDisplay-img-list{
+        gap: 10px;
+    }
+
+    .productDisplay-img-list img{
+        height: 120px;
+    }
+
+    .productDisplay-mainImg{
+        width: auto;
+        height: 510px;
+    }
+
+    .productDisplay-right{
+        margin: 0px 30px;
+    }
+
+    .productDisplay-right h1{
+        font-size: 22px;
+    }
+
+    .productDisplay-rightStars{
+        gap: 3px;
+        font-size: 13px;
+    }
+
+    .productDisplay-rightPrices{
+        margin: 10px 0px;
+        font-size: 18px;
+    }
+
+    .productDisplay-rightDescription{
+        font-size: 13px;
+    }
+
+    .productDisplay-rightSize h1{
+        margin-top: 20px;
+        font-size: 20px;
+    }
+
+    .productDisplay-rightSizes div{
+        padding: 14px 20px;
+    }
+
+    .productDisplay-right button{
+        width: 150px;
+        padding: 15px 0px;
+        margin-bottom: 20px;
+    }
+
+    .productDisplay-rightCategory{
+        margin-top: 5px;
+        font-size: 14px;
+    }
+}
+
+@media(max-width: 1024px){
+    .productDisplay{
+        margin: 0px 30px;
+    }
+
+    .productDisplay-left{
+        gap: 5px;
+    }
+
+    .productDisplay-img-list img{
+        height: 80px;
+    }
+
+    .productDisplay-mainImg{
+        height: 350px;
+    }
+
+    .productDisplay-right h1{
+        font-size: 18px;
+    }
+
+    .productDisplay-rightStars img{
+        width: 15px;
+    }
+
+    .productDisplay-rightDescription{
+        font-size: 12px;
+    }
+
+    .productDisplay-rightSize{
+        margin-top: 10px 0px;
+    }
+
+    .productDisplay-rightSizes div{
+        padding: 10px 16px;
+        font-size: 12px;
+    }
+
+    .productDisplay-right button{
+        width: 120px;
+        padding: 10px 0px;
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+
+    .productDisplay-rightCategory{
+        font-size: 12px;
+    }
+}
+
+@media(max-width: 800px){
+    .productDisplay{
+        margin: 0px 10px;
+    }
+
+    .productDisplay-left{
+        gap: 0px;
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    .productDisplay-img-list{
+        flex-direction: row;
+        gap: 6px;
+    }
+
+    .productDisplay-img-list img{
+        height: 70px;
+    }
+
+
+    .productDisplay-mainImg{
+        height: 300px;
+    }
+
+    .productDisplay-right h1{
+        font-size: 14px;
+    }
+
+    .productDisplay-rightStars img{
+        width: 13px;
+    }
+
+    .productDisplay-rightDescription{
+        font-size: 10px;
+    }
+
+    .productDisplay-rightSize h1{
+        margin-top: 10px 0px;
+    }
+
+    .productDisplay-rightSizes{
+        margin-top: 10px;
+        gap: 5px;
+    }
+
+    .productDisplay-rightSizes div{
+        padding: 4px 11px;
+    }
+
+    .productDisplay-right button{
+        width: 100px;
+        font-size: 12px;
+    }
+
+    .productDisplay-rightCategory{
+        font-size: 10px;
+    }
+}
+
+@media(max-width: 500px){
+    .productDisplay{
+        flex-direction: column;
+    }
+
+    .productDisplay-left{
+        gap: 10px;
+        flex-direction: row;
+        margin: auto;
+    }
+
+    .productDisplay-img-list{
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .productDisplay-img-list img{
+        height: 75px;
+    }
+
+    .productDisplay-mainImg{
+        height: 330px;
+    }
+    
+    .productDisplay-right{
+        margin: 5px;
+    }
+
+    .productDisplay-right h1{
+        margin-top: 15px;
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    .productDisplay-rightStars img{
+        width: 15px;
+    }
+
+    /* .productDisplay-rightDescription{
+        font-size: 10px;
+    }
+
+    .productDisplay-rightSize h1{
+        margin-top: 10px 0px;
+    } */
+
+    .productDisplay-rightSizes{
+        margin: 20px 0;
+        gap: 10px;
+    }
+
+    .productDisplay-rightSizes div{
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+
+    .productDisplay-right button{
+        width: 130px;
+        font-size: 15px;
+        padding: 12px 0;
+    }
+
+    .productDisplay-rightCategory{
+        font-size: 16px;
+    }
+}
+

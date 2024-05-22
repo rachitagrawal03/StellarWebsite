@@ -29,3 +29,19 @@
     border: 1px solid #d0d0d0;
     padding: 40px;
 }
+
+@media(max-width: 1280px){
+    .descriptionBox{
+        margin: 60px;
+    }
+}
+
+@media(max-width: 800px){
+    .descriptionBox{
+        margin: 60px 20px;
+    }
+
+    .descriptionBox-description{
+        font-size: 14px;
+    }
+}
