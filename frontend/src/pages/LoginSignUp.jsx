@@ -19,7 +19,7 @@ const LoginSignUp = () => {
     const login = async () =>{
         console.log("Login function executed", formData);
         let responseData;
-        await fetch('http://localhost:4000/login', {
+        await fetch('https://shopperwebsite-gn7e.onrender.com/login', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -39,7 +39,7 @@ const LoginSignUp = () => {
     const signup = async () =>{
         console.log("Sign up function executed", formData);   
         let responseData;
-        await fetch('http://localhost:4000/signup', {
+        await fetch('https://shopperwebsite-gn7e.onrender.com/signup', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',

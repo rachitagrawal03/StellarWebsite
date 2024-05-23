@@ -17,11 +17,11 @@ const ShopContextProvider = (props) => {
   const [cartItems, setCartItems] = useState(getDefaultCart());
 
   useEffect(() => {
-    fetch("http://localhost:4000/allproducts")
+    fetch("https://shopperwebsite-gn7e.onrender.com/allproducts")
       .then((res) => res.json())
       .then((data) => setAllProduct(data));
     if (localStorage.getItem("auth-token")) {
-      fetch("http://localhost:4000/getcartdata", {
+      fetch("https://shopperwebsite-gn7e.onrender.com/getcartdata", {
         method: "POST",
         headers: {
           Accept: "application/form-data",
@@ -41,7 +41,7 @@ const ShopContextProvider = (props) => {
     console.log(itemId);
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
     if (localStorage.getItem("auth-token")) {
-      fetch("http://localhost:4000/addtocart", {
+      fetch("https://shopperwebsite-gn7e.onrender.com/addtocart", {
         method: "POST",
         headers: {
           Accept: "application/form-data",
@@ -61,7 +61,7 @@ const ShopContextProvider = (props) => {
       [itemId]: prev[itemId] - 1,
     }));
     if (localStorage.getItem("auth-token")) {
-      fetch("http://localhost:4000/removefromcart", {
+      fetch("https://shopperwebsite-gn7e.onrender.com/removefromcart", {
         method: "POST",
         headers: {
           Accept: "application/form-data",
