@@ -4,6 +4,7 @@
     padding: 20px 16px;
     box-shadow: 0 1px 3px -2px black;
     align-items: center;
+    cursor: pointer;
 }
 
 .nav-logo{

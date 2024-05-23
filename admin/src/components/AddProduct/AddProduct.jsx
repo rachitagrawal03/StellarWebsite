@@ -38,8 +38,8 @@ const AddProduct = () => {
 
     if (responseData.success) {
       product.image = responseData.image_url;
-      console.log(product);
-      console.log(JSON.stringify(product));
+      // console.log(product);
+      // console.log(JSON.stringify(product));
 
       await fetch('http://localhost:4000/addproduct', {
         method: 'POST',
@@ -48,7 +48,7 @@ const AddProduct = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(product)
-      }).then((res)=> res.json()).then((data)=> {data.success ? alert("Product Added") : alert("Failed")})
+      }).then((res)=> res.json()).then((data)=> {data.success ? alert("Product Added") : alert("Failed to add product")})
     }
   };
   return (

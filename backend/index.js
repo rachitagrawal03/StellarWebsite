@@ -132,6 +132,143 @@ app.get('/allproducts', async(req, res)=>{
     res.send(products);
 })
 
+
+// creating schema for user model
+const Users = mongoose.model('Users', {
+    name:{
+        type: String,
+    },
+    email:{
+        type: String,
+        unique: true,
+    },
+    password:{
+        type: String,
+    },
+    cartData:{
+        type: Object,
+    },
+    date:{
+        type: Date,
+        default: Date.now,
+    }
+})
+
+// creating endpoint for registering the user
+app.post('/signup', async(req, res) => {
+    let check = await Users.findOne({email: req.body.email});
+    if(check){
+        return res.status(400).json({success: false, errors: "exisiting user found with same mail id"})
+    }
+    let cart = {};
+    for(let i = 0; i< 300; i++){
+        cart[i] = 0;
+    }
+    const user = new Users({
+        name: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+        cartData: cart,
+    })
+
+    await user.save();
+
+    const data = {
+        user:{
+            id: user.id
+        }
+    }
+
+    const token = jwt.sign(data, 'secret_ecom');
+    res.json({success: true, token})
+})
+
+// creating endpoint for user login
+app.post('/login', async (req, res) => {
+    let user = await Users.findOne({email: req.body.email});
+    if(user){
+        const passCompare = req.body.password === user.password;
+        if(passCompare){
+            const data = {
+                user:{
+                    id: user.id
+                }
+            }
+            const token = jwt.sign(data, "secret_ecom");
+            res.json({success: true, token})
+        } else{
+            res.json({success: false, errors: "Wrong Password"})
+        }
+    } else{
+        res.json({success: false, errors: "Wrong Email Id"})
+    }
+})
+
+// creating endpoint for new collections data
+app.get('/newcollection', async(req, res) => {
+    let products = await Product.find({});
+    let newcollection = products.slice(1).slice(-8);
+    console.log("New Collection Fetched"); 
+    res.send(newcollection);
+})
+
+// creating endpoint for popular in men data
+app.get('/popularinmen', async (req, res) => {
+    let products = await Product.find({category: "men"});
+    let popular_in_men = products.slice(0, 4);
+    console.log("Popular In Men Products Fetched");
+    res.send(popular_in_men);
+})
+
+// creating middleware to fetch user based on auth token
+const fetchUser = async (req, res, next) => {
+    const token = req.header('auth-token');
+    if(!token){
+        res.status(401).send({errors: "Please authenticate valid token"})
+    }else{
+        try {
+            const data = jwt.verify(token, 'secret_ecom');
+            req.user = data.user;
+            next();
+        } catch (error) {
+            res.status(401).send({errors: "Please authenticate valid token"})    
+        }
+    }
+}
+
+// creating endpoint for adding products in cartData
+app.post('/addtocart', fetchUser, async(req, res) => {
+    console.log("Added:", req.body, req.user); 
+    let userData = await Users.findOne({_id: req.user.id});
+    userData.cartData[req.body.itemId] += 1;
+    await Users.findOneAndUpdate({_id: req.user.id}, {cartData: userData.cartData})
+    res.send(` Id ${req.body.itemId} product has been added in the cart`)
+})
+
+// creating endpoint to remove the product from cartData
+app.post('/removefromcart', fetchUser, async(req, res)=>{
+    console.log("Removed", req.body, req.user); 
+    let userData = await Users.findOne({_id: req.user.id});
+    if(userData.cartData[req.body.itemId]>0)
+    userData.cartData[req.body.itemId] -= 1;
+    await Users.findOneAndUpdate({_id: req.user.id}, {cartData: userData.cartData})
+    res.send(` Id ${req.body.itemId} product has been removed from the cart`)
+})
+
+// creating endpoint to get cart data
+app.post('/getcartdata', fetchUser, async(req, res) =>{
+    console.log(`getting ${req.user} user cart data...`); 
+    let userData = await Users.findOne({_id: req.user.id});
+    res.json(userData.cartData);
+})
+
+// creating endpoint to get product data from its id
+app.post('/getproductdata', async(req, res) =>{
+    let productData = await Product.find({id: req.user.id});
+    console.log("product data received");
+    res.send(productData);
+})
+
 app.listen(port, (error)=>{
     if(!error){
         console.log("Server Running On Port " + port);
