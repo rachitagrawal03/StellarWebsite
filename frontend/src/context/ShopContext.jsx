@@ -37,7 +37,7 @@ const ShopContextProvider = (props) => {
   }, []);
 
   const handleSubscribeBtn = async (emailId) => {
-    await fetch("http://localhost:4000/api/subscribe", {
+    await fetch("http://localhost:4000/subscribe", {
       method: "POST",
       headers: {
         Accept: "application/form-data",

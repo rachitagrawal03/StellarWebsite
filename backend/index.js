@@ -290,7 +290,7 @@ const Subscribers = mongoose.model('Subscribers', {
 })
 
 // creating api endpoint for saving newsletter subscribers data
-app.post('/api/subscribe', async(req, res) => {
+app.post('/subscribe', async(req, res) => {
     let check = await Subscribers.findOne({email: req.body.email});
     if(check){
         return res.status(400).json({success: false, errors: "exisiting email found"})
