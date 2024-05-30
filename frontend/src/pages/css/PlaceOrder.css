@@ -1,0 +1,51 @@
+.placeOrder{
+    display: flex;
+    align-items: start;
+    justify-content: space-around;
+    gap: 150px;
+    /* margin-top: 100px; */
+    /* margin: 100px auto; */
+    /* margin-top: 100px;
+    margin-left: 110px; */
+    margin: 80px 110px;
+}
+
+.placeOrderLeft{
+    width: 100%;
+    max-width: max(30%, 500px);
+}
+
+.placeOrderLeft .title{
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 33px;
+}
+
+.placeOrderLeft input{
+    margin-bottom: 15px;
+    width: 95.8%;
+    padding: 10px;
+    border: 1px solid #c5c5c5;
+    outline-color: tomato;
+}
+
+.placeOrderLeft .multiFields{
+    display: flex;
+    gap: 10px;
+    /* width: 100%; */
+}
+
+.placeOrderRight{
+    width: 100%;
+    max-width: max(90%, 500px);
+    /* margin: auto; */
+}
+
+.placeOrder .cartItems-total button{
+    margin-top: 10px;
+}
+
+.placeOrder .cartItems-total{
+    margin-right: 0px;
+    margin-left: 100px;
+}

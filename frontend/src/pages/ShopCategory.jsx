@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import all_product from "../assets/all_product";
+// import all_product from "../assets/all_product";
 import "./css/ShopCategory.css"
 import { ShopContext } from "../context/ShopContext";
 import dropdown_icon from '../assets/dropdown_icon.png';

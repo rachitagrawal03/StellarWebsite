@@ -12,9 +12,10 @@ const getDefaultCart = () => {
 };
 
 const ShopContextProvider = (props) => {
-
   const [all_product, setAllProduct] = useState([]);
   const [cartItems, setCartItems] = useState(getDefaultCart());
+  const [showPopup, setShowPopup] = useState(false);
+  const [emailFound, setEmailFound] = useState(false);
 
   useEffect(() => {
     fetch("https://shopperwebsite-gn7e.onrender.com/allproducts")
@@ -35,7 +36,23 @@ const ShopContextProvider = (props) => {
     }
   }, []);
 
-
+  const handleSubscribeBtn = async (emailId) => {
+    await fetch("http://localhost:4000/api/subscribe", {
+      method: "POST",
+      headers: {
+        Accept: "application/form-data",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: emailId }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data.success) {
+          setEmailFound(true);
+        }
+      });
+    setShowPopup(true);
+  };
 
   const addToCart = (itemId) => {
     console.log(itemId);
@@ -49,9 +66,9 @@ const ShopContextProvider = (props) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ itemId: itemId }),
-      })
-        // .then((res) => res.json())
-        // .then((data) => console.log(data));
+      });
+      // .then((res) => res.json())
+      // .then((data) => console.log(data));
     }
   };
 
@@ -69,9 +86,9 @@ const ShopContextProvider = (props) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ itemId: itemId }),
-      })
-        // .then((res) => res.json())
-        // .then((data) => console.log(data));
+      });
+      // .then((res) => res.json())
+      // .then((data) => console.log(data));
     }
   };
 
@@ -87,6 +104,10 @@ const ShopContextProvider = (props) => {
     }
     return totalAmount;
   };
+
+  const handlePromocodeBtn = () => {
+    
+  }
 
   const getTotalCartItems = () => {
     let totalItem = 0;
@@ -105,6 +126,12 @@ const ShopContextProvider = (props) => {
     removeFromCart,
     getTotalCartAmount,
     getTotalCartItems,
+    setShowPopup,
+    showPopup,
+    handleSubscribeBtn,
+    emailFound,
+    setEmailFound,
+    handlePromocodeBtn,
   };
 
   return (

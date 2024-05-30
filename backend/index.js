@@ -24,7 +24,7 @@ mongoose.connect("mongodb+srv://shopperDev:shopperDev1@cluster0.4rgyamf.mongodb.
 
 // api creation
 app.get("/", (req, res) =>{
-    res.send("Express App Is Running");
+    res.send("My Express App Is Running");
 })
 
 // Image Storage Engine
@@ -263,10 +263,45 @@ app.post('/getcartdata', fetchUser, async(req, res) =>{
 })
 
 // creating endpoint to get product data from its id
-app.post('/getproductdata', async(req, res) =>{
-    let productData = await Product.find({id: req.user.id});
-    console.log("product data received");
-    res.send(productData);
+app.get('/product/:id', async(req, res) =>{
+    try {
+        console.log("trying to find the product");
+        const product = await Product.findOne({id: req.params.id});
+        if (!product) {
+          return res.status(404).json({ error: 'Product not found' });
+        }
+        res.json(product);
+      } catch (err) {
+        res.status(500).json({ error: err.message });
+      }
+})
+
+
+// creating schema for subscriber model
+const Subscribers = mongoose.model('Subscribers', {
+    email:{
+        type: String,
+        unique: true,
+    },
+    date:{
+        type: Date,
+        default: Date.now,
+    }
+})
+
+// creating api endpoint for saving newsletter subscribers data
+app.post('/api/subscribe', async(req, res) => {
+    let check = await Subscribers.findOne({email: req.body.email});
+    if(check){
+        return res.status(400).json({success: false, errors: "exisiting email found"})
+    }
+
+    const subscriber = new Subscribers({
+        email: req.body.email,
+    })
+
+    await subscriber.save();
+    res.json({success: true, subscriber})
 })
 
 app.listen(port, (error)=>{

@@ -11,11 +11,18 @@ import Footer from "./components/Footer/Footer";
 import men_banner from "./assets/banner_mens.png"
 import women_banner from "./assets/banner_women.png"
 import kid_banner from "./assets/banner_kids.png"
+import { useContext } from "react";
+import SubscribePopup from "./components/SubscribePopup/SubscribePopup";
+import { ShopContext } from "./context/ShopContext";
+import PlaceOrder from "./pages/PlaceOrder";
 
 
 function App() {
+  const {showPopup} = useContext(ShopContext);
+
   return (
     <>
+    {showPopup && <SubscribePopup/>}
       <div>
         <BrowserRouter>
           <Navbar />
@@ -29,6 +36,7 @@ function App() {
             </Route>
             <Route path="/cart" element={<Cart />} />
             <Route path="/login" element={<LoginSignUp />} />
+            <Route path="/order" element={<PlaceOrder />} />
           </Routes>
           <Footer/>
         </BrowserRouter>
