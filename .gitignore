@@ -14,7 +14,8 @@ logs/
 frontend/dist
 /build
 
-# Ignore configuration files 
+# Ignore configuration files
+config.js 
 frontend/config.js
 
 # Ignore backend-v1 folder

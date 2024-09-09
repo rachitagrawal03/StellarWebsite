@@ -4,9 +4,10 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import Orders from "../../components/Orders/Orders";
 import "./Admin.css"
 import {Routes, Route} from "react-router-dom"
+import BASE_URL from "../../../config";
 
 const Admin = () => {
-  const url = "http://localhost:4000";
+  const url = BASE_URL;
 
   return (
     <div className="admin">
