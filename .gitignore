@@ -7,10 +7,12 @@ logs/
 
 # Ignore environment files
 .env
+frontend/.env
 
 # Ignore build output
 /dist
+frontend/dist
 /build
 
 # Ignore configuration files 
-/config.js
+frontend/config.js
