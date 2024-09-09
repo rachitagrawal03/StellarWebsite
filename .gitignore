@@ -11,6 +11,7 @@ logs/
 
 # Ignore build output
 /dist
+
 frontend/dist
 /build
 
