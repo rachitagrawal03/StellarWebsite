@@ -13,18 +13,23 @@ import women_banner from "./assets/banner_women.png"
 import kid_banner from "./assets/banner_kids.png"
 import { useContext } from "react";
 import SubscribePopup from "./components/SubscribePopup/SubscribePopup";
+import OrderSuccessPopup from "./components/OrderSuccessPopup/OrderSuccessPopup";
 import { ShopContext } from "./context/ShopContext";
 import PlaceOrder from "./pages/PlaceOrder";
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const {showPopup} = useContext(ShopContext);
+  const {showPopup, showOrderPopup} = useContext(ShopContext);
 
   return (
     <>
-    {showPopup && <SubscribePopup/>}
+    
       <div>
         <BrowserRouter>
+          {showPopup && <SubscribePopup/>}
+          {showOrderPopup && <OrderSuccessPopup/>}
+          <ToastContainer/>
           <Navbar />
           <Routes>
             <Route path="/" element={<Shop />} />

@@ -1,17 +1,21 @@
 import "./Popular.css";
-// import data_product from "../../assets/data";
 import Item from "../Item/Item";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import BASE_URL from "../../../config";
 
 const Popular = () => {
   const [popularInMen, setPopularInMen] = useState([]);
-  
+
   useEffect(()=>{
-    fetch('https://shopperwebsite-gn7e.onrender.com/popularinmen')
+    fetch(`${BASE_URL}/api/product/popularinmen`) 
     .then((res) => res.json())
-    .then((data) => setPopularInMen(data))
+    .then((resData) =>{
+      const arrayData = Object.values(resData.data);
+      setPopularInMen(arrayData);
+    })    
   }, [])
 
+  // console.log(popularInMen);
   return (
     <div className="popular">
       <h1>POPULAR IN MEN</h1>

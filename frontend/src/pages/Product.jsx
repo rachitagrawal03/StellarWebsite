@@ -5,55 +5,71 @@ import Breadcrumbs from "../components/Breadcrumbs/Breadcrumbs";
 import ProductDisplay from "../components/ProductDisplay/ProductDisplay";
 import DescriptionBox from "../components/DescriptionBox/DescriptionBox";
 import RelatedProducts from "../components/RelatedProducts/RelatedProducts";
+import axios from "axios";
+import BASE_URL from './../../config'; 
 
 const Product = () => {  
-  
+
   const { all_product } = useContext(ShopContext);
-  // const [product, setProduct] = useState([]);
+  const { productId } = useParams();
+  const [product, setProduct] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const {productId} = useParams();
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const proId = Number(productId);
+        const cachedProduct = localStorage.getItem(`product_${proId}`);
 
-  const proId = Number(productId);
+        if (cachedProduct) {
+          setProduct(JSON.parse(cachedProduct));
+          setLoading(false);
+        } else {
+          const foundProduct = all_product.find((e) => e._id === proId);
 
-  // const fetchInfo = async () => {
-  //   await fetch(`http://localhost:4000/product/${proId}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setProduct(data);
-  //     });
-  // };
+          if (foundProduct) {
+            setProduct(foundProduct);
+            localStorage.setItem(`product_${proId}`, JSON.stringify(foundProduct));
+            setLoading(false);
+          } else {
+            // Fetch product data from API if not found in context or cache
+            const response = await axios.get(`${BASE_URL}/api/product/${proId}`);
+            console.log("api got fetched");
+            setProduct(response.data);
+            localStorage.setItem(`product_${proId}`, JSON.stringify(response.data));
+            setLoading(false);
+          }
+        }
+      } catch (err) {
+        console.error('Error fetching product:', err);
+        setError('Error fetching product data.');
+        setLoading(false);
+      }
+    };
 
-  // useEffect(() => {
-  //   fetchInfo();
-  // }, []);
+    fetchProduct();
+  }, [productId, all_product]);
 
-  // useEffect( async ()=>{
-    // if(all_product)
-    //   {
-    //      const nproduct = all_product.find((e)=> e.id === proId);
-    //      setProduct(nproduct);
-    //   } else {
-      // const response = await fetch(`http://localhost:4000/product/${proId}`)
-      // console.log("fetching data");
-        // console.log(response);
-        // console.log(response.json());
-        // setProduct(response.data);
-        // , {
-        //     method: "POST",
-        //     headers: {
-        //       Accept: "application/form-data",
-        //       "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify({ proId: proId }),
-        //   })
-      // }
-  // })
+   // Log messages to the console based on state
+   useEffect(() => {
+    if (error) {
+      console.log('Error fetching product data:', error);
+    }
+    if (product === null && !error) {
+      console.log('Loading product data...');
+    }
+    if (product) {
+      console.log('Product data loaded successfully.');
+    }
+  }, [error, product]);
+  
 
-  // console.log(all_product);
-  // console.log(productId);
-  // console.log(product);
-  // console.log(product);
-         const product = all_product.find((e)=> e.id === proId);
+  // if (loading) return <div>Loading...</div>; // Show loading state
+  // if (error) return <div>{error}</div>; // Show error message
+  // if (!product) return <div>Product not found.</div>; // Show product not found if no data
+
+
   return <div>
     <Breadcrumbs product={product} />
     <ProductDisplay product={product}/>

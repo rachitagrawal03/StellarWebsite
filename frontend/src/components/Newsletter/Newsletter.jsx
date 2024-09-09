@@ -5,9 +5,7 @@ import { ShopContext } from "../../context/ShopContext";
 
 const Newsletter = () => {
  
-  const {handleSubscribeBtn} = useContext(ShopContext);
-
-  const emailElement = useRef("");
+  const {handleSubscribeBtn, emailElement} = useContext(ShopContext);
 
   return (
     <div className="newsletter">
@@ -17,7 +15,7 @@ const Newsletter = () => {
           <input type="email" placeholder="Your Email Id" ref={emailElement} required/>
           <button onClick={()=> {emailElement.current.value ? handleSubscribeBtn(emailElement.current.value) : alert("Please enter a emaild id to subscribe newletter!!!")}}>Subscribe</button>
         </div>
-    </div>
+    </div> 
   )
 };
 

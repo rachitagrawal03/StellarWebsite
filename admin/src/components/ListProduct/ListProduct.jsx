@@ -1,33 +1,57 @@
 import { useEffect, useState } from "react";
 import "./ListProduct.css";
 import cross_icon from "../../assets/cross_icon.png";
+import axios from "axios";
+import { toast } from "react-toastify";
 
-const ListProduct = () => {
+const ListProduct = ({url}) => {
   const [allProducts, setAllProducts] = useState([]);
 
-  const fetchInfo = async () => {
-    await fetch("https://shopperwebsite-gn7e.onrender.com/allproducts")
-      .then((res) => res.json())
-      .then((data) => {
-        setAllProducts(data);
-      });
-  };
-  console.log(allProducts);
+
+  const fetchProducts = async () => {
+    const response = await axios.get(`${url}/api/product/list`)
+    if(response.data.success){
+      console.log(response);
+      console.log(response.data);
+      console.log(response.data.data);
+      setAllProducts(response.data.data);
+    } 
+    else{
+      toast.error("Error")
+    }
+  }
+
+  // const fetchInfo = async () => {
+  //   await fetch("https://shopperwebsite-gn7e.onrender.com/allproducts")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setAllProducts(data);
+  //     });
+  // };
+  // console.log(allProducts);
 
   useEffect(() => {
-    fetchInfo();
+    fetchProducts();
   }, []);
 
   const removeProduct = async (id) => {
-    await fetch("https://shopperwebsite-gn7e.onrender.com/removeproduct", {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({id:id})
-    })
-    await fetchInfo();
+    // console.log(id);
+    const response = await axios.post(`${url}/api/product/remove`, {id: id});
+    // await fetch("https://shopperwebsite-gn7e.onrender.com/removeproduct", {
+    //   method: 'POST',
+    //   headers: {
+    //     Accept: 'application/json',
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({id:id})
+    // })
+    await fetchProducts();
+    if(response.data.success){
+      toast.success(" Product Removed")
+    }
+    else{
+      toast.error("Error")
+    }
   }
   return (
     <div className="list-product">
@@ -51,7 +75,7 @@ const ListProduct = () => {
                 className="listproduct-formatMain listproduct-format"
               >
                 <img
-                  src={product.image}
+                  src={`${url}/images/` + product.image}
                   alt=""
                   className="listproduct-productIcon"
                 />

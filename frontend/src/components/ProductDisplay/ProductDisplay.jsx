@@ -6,19 +6,19 @@ import { ShopContext } from "../../context/ShopContext";
 
 const ProductDisplay = ({ product }) => {
 
-    const {addToCart} = useContext(ShopContext);
+    const {addToCart, url} = useContext(ShopContext);
 
   return (
     <div className="productDisplay">
       <div className="productDisplay-left">
         <div className="productDisplay-img-list">
-          <img src={product.image} alt="" />
-          <img src={product.image} alt="" />
-          <img src={product.image} alt="" />
-          <img src={product.image} alt="" />
+          <img src={url + "/images/" + product.image} alt="" />
+          <img src={url + "/images/" + product.image} alt="" />
+          <img src={url + "/images/" + product.image} alt="" />
+          <img src={url + "/images/" + product.image} alt="" />
         </div>
         <div className="productDisplay-img">
-          <img src={product.image} className="productDisplay-mainImg" alt="" />
+          <img src={url + "/images/" + product.image} className="productDisplay-mainImg" alt="" />
         </div>
       </div>
 
@@ -55,7 +55,7 @@ const ProductDisplay = ({ product }) => {
             <div>XXL</div>
           </div>
         </div>
-        <button onClick={()=> addToCart(product.id)}>ADD TO CART</button>
+        <button onClick={()=> addToCart(product._id)}>ADD TO CART</button>
         <p className="productDisplay-rightCategory">
           {" "}
           <span>Category : </span> Women, T-Shirt, Crop Top

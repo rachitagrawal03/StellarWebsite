@@ -16,10 +16,12 @@ const Hero = () => {
                 <p>collections</p>
                 <p>for everyone</p>
             </div>
-            <div className="hero-latest-btn">
-              <div>Latest Collection</div>
-              <img src={arrow_icon} alt="" />
-            </div>
+            <a style={{textDecoration: "none"}} href="#new-collection">
+              <div className="hero-latest-btn" >
+                <div>Latest Collection</div>
+                <img src={arrow_icon} alt="" />
+              </div>
+            </a>
         </div>
 
         <div className="hero-right">
