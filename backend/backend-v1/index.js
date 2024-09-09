@@ -18,7 +18,8 @@ app.use(express.json()); // will convert the response that we get in json form
 
 app.use(cors()); // use cors our react app will connect with our express server on 4000 port
 
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
+const dotenv = require("dotenv");
 dotenv.config(); 
 
 // database connection with mongoDB
