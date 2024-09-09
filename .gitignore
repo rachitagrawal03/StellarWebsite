@@ -10,7 +10,8 @@ logs/
 
 # Ignore environment files
 .env
-
+backend-v1/.env
+backend-v2/.env
 
 # Ignore build output
 /dist
@@ -19,8 +20,8 @@ frontend/dist
 /build
 
 # Ignore configuration files
-config.js 
-frontend/config.js
+# config.js 
+# frontend/config.js
 
 # Ignore backend-v1 folder
 # backend-v1/
