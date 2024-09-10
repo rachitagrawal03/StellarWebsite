@@ -1,13 +1,14 @@
 import "./Popular.css";
 import Item from "../Item/Item";
 import { useEffect, useState, useContext } from "react";
-import BASE_URL from "../../../config";
 
 const Popular = () => {
   const [popularInMen, setPopularInMen] = useState([]);
 
+  const url = import.meta.env.VITE_BASE_URL;
+
   useEffect(()=>{
-    fetch(`${BASE_URL}/api/product/popularinmen`) 
+    fetch(`${url}/api/product/popularinmen`) 
     .then((res) => res.json())
     .then((resData) =>{
       const arrayData = Object.values(resData.data);
@@ -15,7 +16,6 @@ const Popular = () => {
     })    
   }, [])
 
-  // console.log(popularInMen);
   return (
     <div className="popular">
       <h1>POPULAR IN MEN</h1>

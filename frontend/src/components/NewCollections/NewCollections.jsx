@@ -2,19 +2,15 @@ import "./NewCollections.css";
 // import new_collections from "../../assets/new_collections";
 import Item from "../Item/Item";
 import { useEffect, useState } from "react";
-import BASE_URL from "../../../config";
+// import BASE_URL from "../../../config";
 
 const NewCollections = () => {
   const [new_collections, setNewCollections] = useState([]);
 
-  // useEffect(()=>{
-  //   fetch('https://shopperwebsite-gn7e.onrender.com/newcollection')
-  //   .then((res) => res.json())
-  //   .then((data) => setNewCollections(data))
-  // }, [])
+  const url = import.meta.env.VITE_BASE_URL;
 
   useEffect(()=>{
-    fetch(`${BASE_URL}/api/product/newcollection`) 
+    fetch(`${url}/api/product/newcollection`) 
     .then((res) => res.json())
     .then((resData) =>{ 
       const arrayData = Object.values(resData.data);

@@ -1,12 +1,12 @@
 import { createContext, useCallback, useEffect, useState, useRef } from "react";
 // import all_product from "../assets/all_product";
 import axios from "axios";
-import BASE_URL from './../../config'; 
+// import BASE_URL from './../../config'; 
 
 
 export const ShopContext = createContext(null);
 
-const url = BASE_URL;;
+const url = import.meta.env.VITE_BASE_URL;
 
 const ShopContextProvider = (props) => {
   const [all_product, setAllProduct] = useState([]);
@@ -41,7 +41,7 @@ const ShopContextProvider = (props) => {
 
   const handleSubscribeBtn = async (emailId) => {
     try {
-      let response = await axios.post(`${BASE_URL}/api/subscribe/newsletter`, { email: emailId });
+      let response = await axios.post(`${url}/api/subscribe/newsletter`, { email: emailId });
       console.log(response);
       if (response.data.success) {
         setEmailFound(true);

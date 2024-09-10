@@ -9,17 +9,13 @@ const CartItems = () => {
   const { all_product, cartItems, removeFromCart, getTotalCartAmount, handlePromocodeBtn, url } = useContext(ShopContext);
 
   const navigate = useNavigate();
-  // console.log(cartItems);
 
   const handleProceedToCheckout = () => {
-    // Check if there are items in the cart
     const hasItems = Object.values(cartItems).some(quantity => quantity > 0); 
 
     if (hasItems) {
-      // Navigate to the Place Order page if there are items
       navigate('/order');
     } else {
-      // Show an alert if the cart is empty
       toast.error("Please add items to the cart before proceeding to checkout.");
     }
   };

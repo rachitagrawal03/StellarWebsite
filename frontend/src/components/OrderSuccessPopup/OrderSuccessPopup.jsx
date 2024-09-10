@@ -9,12 +9,11 @@ import { ShopContext } from "../../context/ShopContext";
 const OrderSuccessPopup = () => {
 
   const {orderFound, setOrderFound, setShowOrderPopup, } = useContext(ShopContext);
-  // console.log("popup getting called");
   
   return (
     <div className="popup">
       <div className="popupContainer">
-          <img src={cross_icon} alt="" className="crossIcon" onClick={()=> {setShowOrderPopup(false); setOrderFound(false); window.location.href = '/';  console.log(orderData);}}/>
+          <img src={cross_icon} alt="" className="crossIcon" onClick={()=> {setShowOrderPopup(false); setOrderFound(false); window.location.href = '/';}}/>
         <div className="popupTitle">
           <img src={orderFound ? checkedImg : warning_icon} alt="" />
           {orderFound ? <h2>Congrats!!!</h2> : <h2>Error!!!</h2> } 

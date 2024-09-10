@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import "./css/PlaceOrder.css"
 import { ShopContext } from "../context/ShopContext";
-import axios from "axios";
 
 const PlaceOrder = () => {
     

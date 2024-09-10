@@ -9,7 +9,6 @@ import { ShopContext } from "../../context/ShopContext";
 const SubscribePopup = () => {
 
   const {emailFound, setShowPopup, setEmailFound} = useContext(ShopContext);
-  console.log("sub popup getting called");
 
   return (
     <div className="popup">

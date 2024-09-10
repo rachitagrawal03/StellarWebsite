@@ -45,6 +45,10 @@
     cursor: pointer;
 }
 
+.nav-menu li a{
+    color: #551A8B;
+}
+
 .nav-menu hr{
     margin-top: 5px;
     border: none;

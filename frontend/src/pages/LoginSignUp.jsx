@@ -39,7 +39,7 @@ const LoginSignUp = () => {
         }
 
         // let responseData;
-        // await fetch('https://shopperwebsite-gn7e.onrender.com/login', {
+        // await fetch('https://website-gn7e.onrender.com/login', {
         //     method: 'POST',
         //     headers: {
         //         Accept: 'application/json',
@@ -63,7 +63,7 @@ const LoginSignUp = () => {
     //     const response = await axios.post(newUrl, formData)
 
     //     // let responseData;
-    //     // await fetch('https://shopperwebsite-gn7e.onrender.com/signup', {
+    //     // await fetch('https://website-gn7e.onrender.com/signup', {
     //     //     method: 'POST',
     //     //     headers: {
     //     //         Accept: 'application/json',

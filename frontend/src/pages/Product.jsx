@@ -6,35 +6,35 @@ import ProductDisplay from "../components/ProductDisplay/ProductDisplay";
 import DescriptionBox from "../components/DescriptionBox/DescriptionBox";
 import RelatedProducts from "../components/RelatedProducts/RelatedProducts";
 import axios from "axios";
-import BASE_URL from './../../config'; 
 
 const Product = () => {  
 
-  const { all_product } = useContext(ShopContext);
+  const { all_product, url } = useContext(ShopContext);
   const { productId } = useParams();
   const [product, setProduct] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         const proId = Number(productId);
         const cachedProduct = localStorage.getItem(`product_${proId}`);
-
+        
         if (cachedProduct) {
           setProduct(JSON.parse(cachedProduct));
           setLoading(false);
         } else {
-          const foundProduct = all_product.find((e) => e._id === proId);
-
+          const foundProduct = all_product.find((e) => e.id === proId);
+          // console.log(foundProduct);
+          
           if (foundProduct) {
             setProduct(foundProduct);
             localStorage.setItem(`product_${proId}`, JSON.stringify(foundProduct));
             setLoading(false);
           } else {
             // Fetch product data from API if not found in context or cache
-            const response = await axios.get(`${BASE_URL}/api/product/${proId}`);
+            const response = await axios.get(`${url}/api/product/${proId}`);
             console.log("api got fetched");
             setProduct(response.data);
             localStorage.setItem(`product_${proId}`, JSON.stringify(response.data));

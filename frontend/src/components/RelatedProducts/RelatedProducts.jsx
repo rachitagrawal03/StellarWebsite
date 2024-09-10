@@ -2,12 +2,13 @@ import "./RelatedProducts.css"
 // import data_product from "../../assets/data"
 import Item from "../Item/Item";
 import { useEffect, useState } from "react";
-import BASE_URL from "../../../config";
+
+const url = import.meta.env.VITE_BASE_URL;
 
 const RelatedProducts = () => {
   const [relatedProducts, setRelatedProducts] = useState([]);
   useEffect(()=>{
-    fetch(`${BASE_URL}/api/product/relatedproducts`) 
+    fetch(`${url}/api/product/relatedproducts`) 
     .then((res) => res.json())
     .then((resData) =>{ 
       const arrayData = Object.values(resData.data);

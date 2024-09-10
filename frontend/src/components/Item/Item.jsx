@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import { ShopContext } from "../../context/ShopContext";
 
 const Item = (props) => {
-    // console.log(props);
-    const {url} = useContext(ShopContext);
+
+  const {url} = useContext(ShopContext);
+  
   return (
     <div>
       <div className="item">
