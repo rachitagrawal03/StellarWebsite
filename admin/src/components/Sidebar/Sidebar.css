@@ -21,6 +21,10 @@
     cursor: pointer;
 }
 
+p{
+    color: #551A8B;
+}
+
 @media(max-width: 800px){
     .sidebar{
         padding: 30px 0px;
