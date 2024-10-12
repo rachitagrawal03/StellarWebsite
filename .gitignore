@@ -25,3 +25,6 @@ frontend/dist
 
 # Ignore backend-v1 folder
 # backend-v1/
+
+features.txt
+currentFeatures.txt

@@ -21,6 +21,7 @@ const userRegister = async(req, res) => {
             return res.status(400).json({success: false, errors: "User already exists with same mail id"})
         }
 
+    
         let cart = {};
 
         // validating user email format & strong password

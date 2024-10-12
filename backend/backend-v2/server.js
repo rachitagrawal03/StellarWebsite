@@ -1,6 +1,8 @@
 import express, { Router } from "express"
 import cors from "cors"
 import { connectDB } from "./config/db.js";
+import path from 'path';
+import { fileURLToPath } from "url";
 import productRouter from "./routes/productRoute.js";
 import subscribeRouter from "./routes/subscribeRoute.js";
 import userRouter from "./routes/userRoute.js";
@@ -13,26 +15,39 @@ import orderRouter from "./routes/orderRoute.js";
 //  app config
 const app = express();
 const PORT = process.env.PORT || 4000;
-
 // middleware
 app.use(express.json())
-app.use(cors())
+app.use(cors()) 
 
 // db connection
 connectDB();
 
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const uploadPath = path.join(__dirname, 'uploads');
+console.log("upload path is: ", uploadPath);
+
 // api endpoints
 app.use("/api/product", productRouter)
-app.use("/images", express.static("uploads"))
+// app.use("/images", express.static("uploads"))
+app.use("/images", express.static(uploadPath))
 app.use("/api/user", userRouter)
 app.use("/api/cart", cartRouter)
 app.use("/api/subscribe", subscribeRouter)
 app.use("/api/order", orderRouter)
 
 
-app.get("/", (req, res)=>{
-    res.send("API working");
-})
+app.get("/", (req, res) => {
+    res.status(200).json("Server Started");
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);  // Logs detailed error information
+    res.status(500).send('Something broke!');  // Sends a 500 error response
+});
 
 app.listen(PORT, ()=>{
     console.log(`Server started on: http://localhost:${PORT}`);
