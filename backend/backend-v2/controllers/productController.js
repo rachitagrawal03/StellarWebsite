@@ -1,45 +1,60 @@
 import productModel from "../models/productModel.js"
+import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import fs from 'fs'
 
 // add product
-const addProduct = async(req, res) => {
-
-    let image_filename = `${req.file.filename}`;
-
-    let products = await productModel.find({});
-    let id;
-    if(products.length>0)
-    {
-        let last_product_array = products.slice(-1);
-        let last_product = last_product_array[0];
-        id = last_product.id + 1;
-    } else{
-        id = 1;
-    }
-    const product = new productModel({
-        id: id,
-        name: req.body.name,
-        image: image_filename,
-        category: req.body.category,
-        new_price: req.body.new_price,
-        old_price: req.body.old_price,
-    })
-
+const addProduct = async (req, res) => {
     try {
-        await product.save();
-        console.log("product saved");
+        const localFilePath = req.file.path; // The file uploaded locally by Multer
+        const cloudinaryResponse = await uploadOnCloudinary(localFilePath); // Upload to Cloudinary
+        // console.log(cloudinaryResponse);
+
+        if (!cloudinaryResponse) {
+            return res.status(500).json({ success: false, message: "Image upload failed" });
+        }
+
+        // Now that the image is uploaded to Cloudinary, get the URL
+        const imageUrl = cloudinaryResponse.secure_url;
+
+        // Generate product ID
+        let products = await productModel.find({});
+        let id;
+        if (products.length > 0) {
+            let last_product = products[products.length - 1];
+            id = last_product.id + 1;
+        } else {
+            id = 1;
+        }
+
+        // Create new product with Cloudinary image URL
+        const product = new productModel({
+            id: id,
+            name: req.body.name,
+            image: imageUrl, // Store the Cloudinary image URL here
+            category: req.body.category,
+            new_price: req.body.new_price,
+            old_price: req.body.old_price,
+        });
+
+        await product.save(); // Save the product in MongoDB
+        // console.log("Product saved with Cloudinary image URL");
+
+        // Delete the local file after upload
+        fs.unlinkSync(localFilePath);
+
         res.json({
             success: true,
-            message: "Product Added", 
-        })
+            message: "Product Added",
+        });
     } catch (error) {
         console.log(error);
-        res.json({
-        success: false,
-        message: "Error",
-    })
+        res.status(500).json({
+            success: false,
+            message: "Error",
+        });
     }
-}
+};
+
 
 // all products
 const allProduct = async(req, res) => {

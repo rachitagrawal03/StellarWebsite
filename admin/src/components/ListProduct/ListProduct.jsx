@@ -11,9 +11,9 @@ const ListProduct = ({url}) => {
   const fetchProducts = async () => {
     const response = await axios.get(`${url}/api/product/list`)
     if(response.data.success){
-      console.log(response);
-      console.log(response.data);
-      console.log(response.data.data);
+      // console.log(response);
+      // console.log(response.data);
+      // console.log(response.data.data);
       setAllProducts(response.data.data);
     } 
     else{
@@ -21,30 +21,12 @@ const ListProduct = ({url}) => {
     }
   }
 
-  // const fetchInfo = async () => {
-  //   await fetch("https://shopperwebsite-gn7e.onrender.com/allproducts")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setAllProducts(data);
-  //     });
-  // };
-  // console.log(allProducts);
-
   useEffect(() => {
     fetchProducts();
   }, []);
 
   const removeProduct = async (id) => {
-    // console.log(id);
     const response = await axios.post(`${url}/api/product/remove`, {id: id});
-    // await fetch("https://shopperwebsite-gn7e.onrender.com/removeproduct", {
-    //   method: 'POST',
-    //   headers: {
-    //     Accept: 'application/json',
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({id:id})
-    // })
     await fetchProducts();
     if(response.data.success){
       toast.success(" Product Removed")
@@ -75,7 +57,7 @@ const ListProduct = ({url}) => {
                 className="listproduct-formatMain listproduct-format"
               >
                 <img
-                  src={`${url}/images/` + product.image}
+                  src={product.image}
                   alt=""
                   className="listproduct-productIcon"
                 />

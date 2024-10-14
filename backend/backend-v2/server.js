@@ -1,8 +1,6 @@
 import express, { Router } from "express"
 import cors from "cors"
 import { connectDB } from "./config/db.js";
-import path from 'path';
-import { fileURLToPath } from "url";
 import productRouter from "./routes/productRoute.js";
 import subscribeRouter from "./routes/subscribeRoute.js";
 import userRouter from "./routes/userRoute.js";
@@ -22,17 +20,9 @@ app.use(cors())
 // db connection
 connectDB();
 
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const uploadPath = path.join(__dirname, 'uploads');
-console.log("upload path is: ", uploadPath);
-
 // api endpoints
 app.use("/api/product", productRouter)
-// app.use("/images", express.static("uploads"))
-app.use("/images", express.static(uploadPath))
+app.use("/images", express.static("uploads"))
 app.use("/api/user", userRouter)
 app.use("/api/cart", cartRouter)
 app.use("/api/subscribe", subscribeRouter)

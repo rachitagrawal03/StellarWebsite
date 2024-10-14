@@ -47,38 +47,6 @@ const AddProduct = ({url}) => {
       toast.error(response.data.message)
     }
 
-
-
-    // let responseData;
-    // let product = productDetails;
-
-    // formData.append("product", image);
-    // await fetch("https://shopperwebsite-gn7e.onrender.com/upload", {
-    //   method: "POST",
-    //   headers: {
-    //     Accept: "application/json",
-    //   },
-    //   body: formData,
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     responseData = data;
-    //   });
-
-    // if (responseData.success) {
-    //   product.image = responseData.image_url;
-    //   // console.log(product);
-    //   // console.log(JSON.stringify(product));
-
-    //   await fetch('https://shopperwebsite-gn7e.onrender.com/addproduct', {
-    //     method: 'POST',
-    //     headers: {
-    //       Accept: 'application/json',
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(product)
-    //   }).then((res)=> res.json()).then((data)=> {data.success ? alert("Product Added") : alert("Failed to add product")})
-    // }
   };
   return (
     <form className="add-product" onSubmit={handleFormSubmit}>
@@ -151,6 +119,7 @@ const AddProduct = ({url}) => {
           name="image"
           id="file-input"
           hidden
+          required
         />
       </div>
       <button type="submit" className="addproduct-btn">
