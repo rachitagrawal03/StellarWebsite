@@ -8,9 +8,9 @@ import Product from "./pages/Product";
 import Cart from "./pages/Cart";
 import LoginSignUp from "./pages/LoginSignUp";
 import Footer from "./components/Footer/Footer";
-import men_banner from "./assets/banner_mens.png"
-import women_banner from "./assets/banner_women.png"
-import kid_banner from "./assets/banner_kids.png"
+// import men_banner from "./assets/banner_mens.png"
+// import women_banner from "./assets/banner_women.png"
+// import kid_banner from "./assets/banner_kids.png"
 import { useContext } from "react";
 import SubscribePopup from "./components/SubscribePopup/SubscribePopup";
 import OrderSuccessPopup from "./components/OrderSuccessPopup/OrderSuccessPopup";
@@ -21,6 +21,9 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const {showPopup, showOrderPopup} = useContext(ShopContext);
+  const men_banner = "https://res.cloudinary.com/doaux8dg1/image/upload/v1728900969/banner_mens_euavwq.png";
+  const women_banner = "https://res.cloudinary.com/doaux8dg1/image/upload/v1728900969/banner_women_ladthr.png";
+  const kid_banner = "https://res.cloudinary.com/doaux8dg1/image/upload/v1728900966/banner_kids_a50bdf.png";
 
   return (
     <>

@@ -1,7 +1,8 @@
 import "./Offers.css";
-import exclusive_image from "../../assets/exclusive_image.png";
+// import exclusive_image from "../../assets/exclusive_image.png";
 
 const Offers = () => {
+  const exclusive_image="https://res.cloudinary.com/doaux8dg1/image/upload/v1728902682/exclusive_image_ggtsok.png";
   return (
     <div className="offers">
       <div className="offers-left">
